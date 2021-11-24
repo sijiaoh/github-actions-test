@@ -11,19 +11,20 @@ jobs:
     steps:
       - name: Set STAGE environment
         run: echo "STAGE=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+      - run: echo "SECRETS_KEY=${STAGE}_envs" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: 14
 
-      - run: node maskSecrets.js "${{secrets[${STAGE}_envs]}}"
+      - run: node maskSecrets.js "${{secrets[env.SECRETS_KEY]}}"
 
       - name: Set STAGE environment
         run: echo "STAGE=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
       - run: echo ${STAGE}
       - run: echo ${{env.STAGE}}
       - name: Set SECRETS
-        run: echo "${{secrets.SECRETS}}" >> $GITHUB_ENV
+        run: echo "${{secrets[env.SECRETS_KEY]}}" >> $GITHUB_ENV
       - run: echo ${{env.A}}
       - run: echo ${{env.B}}
