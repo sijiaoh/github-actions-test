@@ -1,0 +1,19 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set STAGE environment
+        run: echo "STAGE=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+      - run: echo ${STAGE}
+      - run: echo ${{env.STAGE}}
+      - name: Set SECRETS
+        run: echo "${{secret.SECRETS}}" >> $GITHUB_ENV
+      - run: echo ${{env.A}}
+      - run: echo ${{env.B}}
