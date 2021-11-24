@@ -9,6 +9,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - run: echo "::add-mask::${{secrets.SECRETS}}"
+
       - name: Set STAGE environment
         run: echo "STAGE=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
       - run: echo ${STAGE}
