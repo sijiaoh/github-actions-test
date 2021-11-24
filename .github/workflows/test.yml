@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: 14
 
-      - run: node maskSecrets.js "${{secrets.${STAGE}_envs}}"
+      - run: node maskSecrets.js "${{secrets[${STAGE}_envs]}}"
 
       - name: Set STAGE environment
         run: echo "STAGE=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
