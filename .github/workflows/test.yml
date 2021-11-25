@@ -18,9 +18,12 @@ jobs:
         with:
           node-version: 14
 
-      - run: node maskSecrets.js "${{secrets[env.SECRETS_KEY]}}"
+      # - run: node maskSecrets.js "${{secrets[env.SECRETS_KEY]}}"
       - run: echo "${{secrets[env.SECRETS_KEY]}} >> $GITHUB_ENV"
 
       - run: echo ${{env.A}}
       - run: echo ${{env.B}}
       - run: echo ${{env.C}}
+      - run: echo ${A}
+      - run: echo ${B}
+      - run: echo ${C}
