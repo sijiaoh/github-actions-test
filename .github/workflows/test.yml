@@ -19,12 +19,8 @@ jobs:
           node-version: 14
 
       - run: node maskSecrets.js "${{secrets[env.SECRETS_KEY]}}"
+      - run: echo "${{secrets[env.SECRETS_KEY]}} >> $GITHUB_ENV"
 
-      - name: Set STAGE environment
-        run: echo "STAGE=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-      - run: echo ${STAGE}
-      - run: echo ${{env.STAGE}}
-      - name: Set SECRETS
-        run: echo "${{secrets[env.SECRETS_KEY]}}" >> $GITHUB_ENV
       - run: echo ${{env.A}}
       - run: echo ${{env.B}}
+      - run: echo ${{env.C}}
